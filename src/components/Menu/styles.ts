@@ -38,3 +38,13 @@ export const MenuGroup = styled.div`
     }
   `}
 `
+
+type MenuFull = {
+  isOpen: boolean
+}
+
+export const MenuFull = styled.nav<MenuFull>`
+  ${({ isOpen }) => css`
+    opacity: ${isOpen ? 1 : 0};
+  `}
+`
