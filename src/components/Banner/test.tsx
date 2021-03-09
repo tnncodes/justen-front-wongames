@@ -13,7 +13,7 @@ const props = {
 
 describe('Banner', () => {
   it('should render correctly', () => {
-    renderWithTheme(<Banner {...props} />)
+    const { container } = renderWithTheme(<Banner {...props} />)
 
     // verifique se o title está sendo renderizado
     // -------------------------------------------
@@ -30,5 +30,7 @@ describe('Banner', () => {
     // verifique se a imagem está sendo renderizada
     // --------------------------------------------
     expect(screen.getByRole('img', { name: /Defy death/i })).toBeInTheDocument()
+
+    expect(container.firstChild).toMatchSnapshot()
   })
 })
