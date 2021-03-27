@@ -1,13 +1,13 @@
 import { BannerProps } from 'components/Banner'
 import { GameCardProps } from 'components/GameCard'
 import Highlight, { HighlightProps } from 'components/Highlight'
-import GameCardSlider from 'components/GameCardSlider'
-import BannerSlider from 'components/BannerSlider'
 
 import { Container } from 'components/Container'
-import Menu from 'components/Menu'
-import Heading from 'components/Heading'
 import Footer from 'components/Footer'
+import Heading from 'components/Heading'
+import Menu from 'components/Menu'
+import GameCardSlider from 'components/GameCardSlider'
+import BannerSlider from 'components/BannerSlider'
 
 import * as S from './styles'
 
@@ -30,13 +30,13 @@ const Home = ({
   mostPopularGames,
   upcommingGames,
   upcommingHighligth,
+  upcommingMoreGames,
   freeGames,
   freeHighligth
 }: HomeTemplateProps) => (
   <section>
     <Container>
       <Menu />
-
       <S.SectionBanner>
         <BannerSlider items={banners} />
       </S.SectionBanner>
@@ -57,26 +57,23 @@ const Home = ({
         <Heading lineLeft lineColor="secondary">
           Most Popular
         </Heading>
-
         <Highlight {...mostPopularHighlight} />
-        <GameCardSlider items={mostPopularGames} color="white" />
+        <GameCardSlider items={mostPopularGames} />
       </S.SectionMostPopular>
 
       <S.SectionUpcoming>
         <Heading lineLeft lineColor="secondary">
           Upcomming
         </Heading>
-
         <GameCardSlider items={upcommingGames} />
         <Highlight {...upcommingHighligth} />
-        <GameCardSlider items={upcommingGames} />
+        <GameCardSlider items={upcommingMoreGames} />
       </S.SectionUpcoming>
 
       <S.SectionFreeGames>
         <Heading lineLeft lineColor="secondary">
-          Free Games
+          Free games
         </Heading>
-
         <Highlight {...freeHighligth} />
         <GameCardSlider items={freeGames} />
       </S.SectionFreeGames>
