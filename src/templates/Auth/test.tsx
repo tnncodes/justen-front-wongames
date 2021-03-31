@@ -1,3 +1,4 @@
+import { screen } from '@testing-library/react'
 import { renderWithTheme } from 'utils/tests/helpers'
 
 import Auth from '.'
@@ -11,13 +12,30 @@ describe('<Auth />', () => {
     )
 
     // verificar se tem 2 loogos
+    expect(screen.getAllByRole('img', { name: /won games/i })).toHaveLength(2)
 
     // verificar se tem o heading principal do banner
+    expect(
+      screen.getByRole('heading', {
+        name: /All your favorite games in one place/i
+      })
+    ).toBeInTheDocument()
 
     // verificar se tem o subtitle
+    expect(
+      screen.getByRole('heading', {
+        name: /won is the best and most complete gaming platform/i
+      })
+    ).toBeInTheDocument()
 
     // verificar se tem o title do content
+    expect(
+      screen.getByRole('heading', {
+        name: /auth title/i
+      })
+    ).toBeInTheDocument()
 
     // verificar se o children está sendo renderizado
+    expect(screen.getByRole('textbox')).toBeInTheDocument()
   })
 })
