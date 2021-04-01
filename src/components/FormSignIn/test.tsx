@@ -244,7 +244,7 @@ describe('<FormSignIn />', () => {
                 Don\`t have an account?
                  
                 <a
-                  href="/"
+                  href="/sign-up"
                 >
                   Sign up
                 </a>
