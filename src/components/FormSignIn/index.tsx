@@ -21,7 +21,7 @@ const FormSignIn = () => (
         type="password"
         icon={<Lock />}
       />
-      <S.ForgetPassword href="#">Forget your password?</S.ForgetPassword>
+      <S.ForgotPassword href="#">Forget your password?</S.ForgotPassword>
 
       <Button size="large" fullWidth>
         Sign in now
