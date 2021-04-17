@@ -28,6 +28,7 @@ describe('<GameItem />', () => {
     expect(screen.getByText('R$ 215,00')).toBeInTheDocument()
   })
 
+  // caso de teste para verificar o link
   it('should render the item with download link', () => {
     const downloadLink = 'https://link'
 
@@ -36,5 +37,28 @@ describe('<GameItem />', () => {
     expect(
       screen.getByRole('link', { name: `Get ${props.title} here` })
     ).toHaveAttribute('href', downloadLink)
+  })
+
+  it('should render the payment info', () => {
+    const paymentInfo = {
+      flag: 'mastercard',
+      img: '/img/master-card.png',
+      number: '**** **** **** 4326',
+      purchaseDate: 'Purchase made on 07/20/2020 at 20:32'
+    }
+
+    renderWithTheme(<GameItem {...props} paymentInfo={paymentInfo} />)
+
+    // verificar bandeira do cartão
+    expect(screen.getByRole('img', { name: paymentInfo.flag })).toHaveAttribute(
+      'src',
+      paymentInfo.img
+    )
+
+    // verificar o numero do cartao
+    expect(screen.getByText(paymentInfo.number)).toBeInTheDocument()
+
+    // verificar da data de compra
+    expect(screen.getByText(paymentInfo.purchaseDate)).toBeInTheDocument()
   })
 })
