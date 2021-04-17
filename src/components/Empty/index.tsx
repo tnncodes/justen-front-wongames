@@ -6,10 +6,10 @@ import * as S from './styles'
 export type EmptyProps = {
   title: string
   description: string
-  haslink?: boolean
+  hasLink?: boolean
 }
 
-const Empty = ({ title, description, haslink }: EmptyProps) => (
+const Empty = ({ title, description, hasLink }: EmptyProps) => (
   <S.Wrapper>
     <S.Image
       src="/img/empty.svg"
@@ -20,7 +20,7 @@ const Empty = ({ title, description, haslink }: EmptyProps) => (
     <S.Title>{title}</S.Title>
     <S.Description>{description}</S.Description>
 
-    {haslink && (
+    {hasLink && (
       <Link href="/" passHref>
         <Button as="a">Go back to store</Button>
       </Link>
