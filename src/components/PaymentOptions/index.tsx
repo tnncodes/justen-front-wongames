@@ -23,7 +23,7 @@ const PaymentOptions = ({ cards, handlePayment }: PaymentOptionsProps) => (
         Payment
       </Heading>
 
-      <S.CardList>
+      <S.CardsList>
         {cards?.map((card) => (
           <S.CardItem key={card.number}>
             <S.CardInfo>
@@ -42,7 +42,7 @@ const PaymentOptions = ({ cards, handlePayment }: PaymentOptionsProps) => (
         <S.AddCard role="button">
           <Add size={14} /> Add a new credit card
         </S.AddCard>
-      </S.CardList>
+      </S.CardsList>
     </S.Body>
 
     <S.Footer>
