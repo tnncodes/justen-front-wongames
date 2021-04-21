@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react'
 import { renderWithTheme } from 'utils/tests/helpers'
+import theme from 'styles/theme'
 
 import ProfileMenu from '.'
 
@@ -29,5 +30,16 @@ describe('ProfileMenu', () => {
     // gerar snaphot em outro arquivo
     // ------------------------------
     expect(container.firstChild).toMatchSnapshot()
+  })
+
+  it('should render the menu with an active link defined', () => {
+    renderWithTheme(<ProfileMenu activeLink="/profile/cards" />)
+
+    // testar o link ativo
+    // -------------------
+    expect(screen.getByRole('link', { name: /my cards/i })).toHaveStyle({
+      background: theme.colors.primary,
+      color: theme.colors.white
+    })
   })
 })
