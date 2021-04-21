@@ -8,6 +8,7 @@ import { Container } from 'components/Container'
 import Heading from 'components/Heading'
 import Showcase from 'components/Showcase'
 import Base from 'templates/Base'
+import Empty from 'components/Empty'
 
 import * as S from './styles'
 
@@ -33,11 +34,18 @@ const Cart = ({
           My cart
         </Heading>
 
-        <S.Content>
-          <CartList items={items} total={total} />
+        {items.length ? (
+          <S.Content>
+            <CartList items={items} total={total} />
 
-          <PaymentOptions cards={cards} handlePayment={handlePayment} />
-        </S.Content>
+            <PaymentOptions cards={cards} handlePayment={handlePayment} />
+          </S.Content>
+        ) : (
+          <Empty
+            title="Your cart is empty"
+            description="Go back to the store and explore great games and offers"
+          />
+        )}
 
         <Divider />
       </Container>
