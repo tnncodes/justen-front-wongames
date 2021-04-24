@@ -3,11 +3,13 @@ import { renderWithTheme } from 'utils/tests/helpers'
 
 import ExploreSidebar from '.'
 
+import items from './mock'
+
 describe('<ExploreSidebar />', () => {
   // verificar se existe os titulos
   // ------------------------------
   it('should render the headings', () => {
-    renderWithTheme(<ExploreSidebar />)
+    renderWithTheme(<ExploreSidebar items={items} />)
 
     // price
     expect(screen.getByRole('heading', { name: /price/i })).toBeInTheDocument()
@@ -27,7 +29,7 @@ describe('<ExploreSidebar />', () => {
   // verificar se existe os inputs
   // -----------------------------
   it('should render inputs', () => {
-    renderWithTheme(<ExploreSidebar />)
+    renderWithTheme(<ExploreSidebar items={items} />)
 
     // checkbox
     expect(
@@ -43,7 +45,7 @@ describe('<ExploreSidebar />', () => {
   // verificar se existe o botao
   // ---------------------------
   it('should render the filter button', () => {
-    renderWithTheme(<ExploreSidebar />)
+    renderWithTheme(<ExploreSidebar items={items} />)
 
     expect(screen.getByRole('button', { name: /filter/i })).toBeInTheDocument()
   })
