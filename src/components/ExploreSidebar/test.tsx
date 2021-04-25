@@ -142,7 +142,10 @@ describe('<ExploreSidebar />', () => {
     expect(onFilter).toBeCalledWith({ sort_by: 'high-to-low' })
   })
 
+  // verificar o abrir e fechar no mobile
+  // ------------------------------------
   it('should open/close sidebar when filtering on mobile ', () => {
+    // renderizacao do componente
     const { container } = renderWithTheme(
       <ExploreSidebar items={items} onFilter={jest.fn} />
     )
@@ -158,12 +161,12 @@ describe('<ExploreSidebar />', () => {
 
     expect(Element).not.toHaveStyleRule('opacity', '1', variant)
 
+    // abrir
     userEvent.click(screen.getByLabelText(/open filters/))
-
     expect(Element).toHaveStyleRule('opacity', '1', variant)
 
+    // fechar
     userEvent.click(screen.getByLabelText(/close filters/))
-
     expect(Element).not.toHaveStyleRule('opacity', '1', variant)
   })
 })
