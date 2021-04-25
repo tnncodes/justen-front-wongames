@@ -1,9 +1,10 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithTheme } from 'utils/tests/helpers'
+import { css } from 'styled-components'
 
 import ExploreSidebar from '.'
-
+import { Overlay } from './styles'
 import items from './mock'
 
 describe('<ExploreSidebar />', () => {
@@ -139,5 +140,30 @@ describe('<ExploreSidebar />', () => {
 
     // espero que a funcao filtrar tenha o resultado com high to low
     expect(onFilter).toBeCalledWith({ sort_by: 'high-to-low' })
+  })
+
+  it('should open/close sidebar when filtering on mobile ', () => {
+    const { container } = renderWithTheme(
+      <ExploreSidebar items={items} onFilter={jest.fn} />
+    )
+
+    const variant = {
+      media: '(max-width:768px)',
+      modifier: String(css`
+        ${Overlay}
+      `)
+    }
+
+    const Element = container.firstChild
+
+    expect(Element).not.toHaveStyleRule('opacity', '1', variant)
+
+    userEvent.click(screen.getByLabelText(/open filters/))
+
+    expect(Element).toHaveStyleRule('opacity', '1', variant)
+
+    userEvent.click(screen.getByLabelText(/close filters/))
+
+    expect(Element).not.toHaveStyleRule('opacity', '1', variant)
   })
 })
