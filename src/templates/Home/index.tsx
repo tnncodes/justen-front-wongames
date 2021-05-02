@@ -10,6 +10,7 @@ import * as S from './styles'
 import Base from 'templates/Base'
 
 export type HomeTemplateProps = {
+  data: any
   banners: BannerProps[]
   newGames: GameCardProps[]
   mostPopularHighlight: HighlightProps
