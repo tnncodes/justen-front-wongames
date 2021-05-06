@@ -21,9 +21,7 @@ jest.mock('components/GameItem', () => ({
 
 describe('<OrdersList />', () => {
   it('should render the heading', () => {
-    const { debug } = renderWithTheme(<OrdersList items={mock} />)
-
-    debug()
+    renderWithTheme(<OrdersList items={mock} />)
 
     // verificar se existe titulo
     expect(
