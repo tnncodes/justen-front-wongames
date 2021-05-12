@@ -47,6 +47,7 @@ const Home = ({
       title="Most Popular"
       games={mostPopularGames}
       highlight={mostPopularHighlight}
+      color="black"
     />
 
     <S.SectionUpcoming>
