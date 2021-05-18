@@ -32,7 +32,7 @@ export const gamesMapper = (games: QueryGames_games[] | null | undefined) => {
   )
 }
 
-export const highlighMapper = (
+export const highlightMapper = (
   highlight: QueryHome_sections_freeGames_highlight | null | undefined
 ) => {
   return (
