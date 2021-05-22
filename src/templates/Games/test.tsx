@@ -1,9 +1,11 @@
 import { screen } from '@testing-library/react'
+import { MockedProvider } from '@apollo/client/testing'
+
 import { renderWithTheme } from 'utils/tests/helpers'
-import gamesMock from 'components/GameCardSlider/mock'
 import filterItemsMock from 'components/ExploreSidebar/mock'
 
 import Games from '.'
+import { QUERY_GAMES } from 'graphql/queries/games'
 
 jest.mock('templates/Base', () => ({
   __esModule: true,
@@ -19,28 +21,68 @@ jest.mock('components/ExploreSidebar', () => ({
   }
 }))
 
-jest.mock('components/GameCard', () => ({
-  __esModule: true,
-  default: function Mock() {
-    return <div data-testid="Mock GameCard" />
-  }
-}))
-
 describe('<Games />', () => {
-  it('should render sections', () => {
+  it('should render loading when starting the template', () => {
     renderWithTheme(
-      <Games filterItems={filterItemsMock} games={[gamesMock[0]]} />
+      <MockedProvider mocks={[]} addTypename={false}>
+        <Games filterItems={filterItemsMock} />
+      </MockedProvider>
     )
 
-    // verificar se existe sidebar na página
-    expect(screen.getByTestId('Mock ExploreSidebar')).toBeInTheDocument()
+    // verifico se nao tiver dados, exibir loading
+    expect(screen.getByText(/loading.../i)).toBeInTheDocument()
+  })
 
-    // verificar se existe cards na página
-    expect(screen.getByTestId('Mock GameCard')).toBeInTheDocument()
+  it('should render sections', async () => {
+    renderWithTheme(
+      <MockedProvider
+        mocks={[
+          {
+            request: {
+              query: QUERY_GAMES,
+              variables: { limit: 15 }
+            },
+            result: {
+              data: {
+                games: [
+                  {
+                    name: 'RimWorld',
+                    slug: 'rimworld',
+                    cover: {
+                      url: '/uploads/rimworld_8e93acc963.jpg'
+                    },
+                    developers: [{ name: 'Ludeon Studios' }],
+                    price: 65.99,
+                    __typename: 'Game'
+                  }
+                ]
+              }
+            }
+          }
+        ]}
+        addTypename={false}
+      >
+        <Games filterItems={filterItemsMock} />
+      </MockedProvider>
+    )
+
+    // verifico se nao tiver dados, exibir loading
+    expect(screen.getByText(/loading.../i)).toBeInTheDocument()
+
+    // esperamos até que tenhamos dados para obter os elementos
+    // getByTest => tem certeza do elemento
+    // queryByTest => nao tem o elemento
+    // findByTest => processos assincronos
+
+    // verificar se existe sidebar na página
+    expect(await screen.findByTestId('Mock ExploreSidebar')).toBeInTheDocument()
+
+    // verificar se existe o jogo na pagina
+    expect(await screen.findByText(/RimWorld/i)).toBeInTheDocument()
 
     // verificar se existe button na página
     expect(
-      screen.getByRole('button', { name: /show more/i })
+      await screen.findByRole('button', { name: /show more/i })
     ).toBeInTheDocument()
   })
 })
