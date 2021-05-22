@@ -2,7 +2,7 @@ import { ApolloClient, HttpLink, NormalizedCacheObject } from '@apollo/client'
 import { useMemo } from 'react'
 import apolloCache from './apolloCache'
 
-let apolloClient: ApolloClient<NormalizedCacheObject>
+let apolloClient: ApolloClient<NormalizedCacheObject | null>
 
 function createApolloClient() {
   return new ApolloClient({
@@ -12,11 +12,12 @@ function createApolloClient() {
   })
 }
 
-export function initializeApollo(initialState = {}) {
+export function initializeApollo(initialState = null) {
   // serve para verificar se ja existe uma instancia, para nao criar outra
   const apolloClientGlobal = apolloClient ?? createApolloClient()
 
-  // recuperando os dados de cache
+  // se a pagina usar o apolloClient no lado Client
+  // hidratamos o estado inicial aqui
   if (initialState) {
     apolloClientGlobal.cache.restore(initialState)
   }
