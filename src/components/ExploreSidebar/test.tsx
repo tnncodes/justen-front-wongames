@@ -22,7 +22,9 @@ describe('<ExploreSidebar />', () => {
     ).toBeInTheDocument()
 
     // system
-    expect(screen.getByRole('heading', { name: /system/i })).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: /platform/i })
+    ).toBeInTheDocument()
 
     // genre
     expect(screen.getByRole('heading', { name: /genre/i })).toBeInTheDocument()
@@ -58,7 +60,7 @@ describe('<ExploreSidebar />', () => {
     renderWithTheme(
       <ExploreSidebar
         items={items}
-        initialValues={{ windows: true, sort_by: 'low-to-high' }}
+        initialValues={{ platforms: ['windows'], sort_by: 'low-to-high' }}
         onFilter={jest.fn}
       />
     )
@@ -79,7 +81,7 @@ describe('<ExploreSidebar />', () => {
     renderWithTheme(
       <ExploreSidebar
         items={items}
-        initialValues={{ windows: true, sort_by: 'low-to-high' }}
+        initialValues={{ platforms: ['windows'], sort_by: 'low-to-high' }}
         onFilter={onFilter}
       />
     )
@@ -88,7 +90,10 @@ describe('<ExploreSidebar />', () => {
     userEvent.click(screen.getByRole('button', { name: /filter/i }))
 
     // espero que a funcao filtrar seja chamada com os valores iniciais
-    expect(onFilter).toBeCalledWith({ windows: true, sort_by: 'low-to-high' })
+    expect(onFilter).toBeCalledWith({
+      platforms: ['windows'],
+      sort_by: 'low-to-high'
+    })
   })
 
   // verificar quando os itens sao marcados
@@ -114,8 +119,7 @@ describe('<ExploreSidebar />', () => {
 
     // espero que a funcao filtrar seja chamada com os valores iniciais
     expect(onFilter).toBeCalledWith({
-      windows: true,
-      linux: true,
+      platforms: ['windows', 'linux'],
       sort_by: 'low-to-high'
     })
   })
