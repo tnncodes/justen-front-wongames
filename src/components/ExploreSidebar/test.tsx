@@ -114,8 +114,8 @@ describe('<ExploreSidebar />', () => {
     // clicando e marcando o item low to high
     userEvent.click(screen.getByLabelText(/low to high/i))
 
-    // clicando no botao filter
-    userEvent.click(screen.getByRole('button', { name: /filter/i }))
+    // espero que a funcao seja chamada 4 vezes
+    expect(onFilter).toBeCalledTimes(4)
 
     // espero que a funcao filtrar seja chamada com os valores iniciais
     expect(onFilter).toBeCalledWith({
@@ -138,9 +138,6 @@ describe('<ExploreSidebar />', () => {
 
     // clicando e marcando o item high to low
     userEvent.click(screen.getByLabelText(/high to low/i))
-
-    // clicando no botao filter
-    userEvent.click(screen.getByRole('button', { name: /filter/i }))
 
     // espero que a funcao filtrar tenha o resultado com high to low
     expect(onFilter).toBeCalledWith({ sort_by: 'high-to-low' })
@@ -171,6 +168,11 @@ describe('<ExploreSidebar />', () => {
 
     // fechar
     userEvent.click(screen.getByLabelText(/close filters/))
+    expect(Element).not.toHaveStyleRule('opacity', '1', variant)
+
+    // abrir - fechar
+    userEvent.click(screen.getByLabelText(/open filters/))
+    userEvent.click(screen.getByRole('button', { name: /filter/i }))
     expect(Element).not.toHaveStyleRule('opacity', '1', variant)
   })
 })
