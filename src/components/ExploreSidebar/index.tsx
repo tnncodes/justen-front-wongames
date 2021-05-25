@@ -1,16 +1,15 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import xor from 'lodash.xor'
 import { Close } from '@styled-icons/material-outlined/Close'
 import { FilterList } from '@styled-icons/material-outlined/FilterList'
-import { ParsedUrlQuery } from 'querystring'
 
 import Heading from 'components/Heading'
+import Button from 'components/Button'
 import Checkbox from 'components/Checkbox'
 import Radio from 'components/Radio'
-import Button from 'components/Button'
 
 import * as S from './styles'
-import { useEffect } from 'react'
+import { ParsedUrlQueryInput } from 'querystring'
 
 export type ItemProps = {
   title: string
@@ -24,7 +23,7 @@ type Field = {
   name: string
 }
 
-type Values = ParsedUrlQuery
+type Values = ParsedUrlQueryInput
 
 export type ExploreSidebarProps = {
   items: ItemProps[]

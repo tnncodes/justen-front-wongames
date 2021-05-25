@@ -1,14 +1,17 @@
+import { ParsedUrlQueryInput } from 'querystring'
+import { useRouter } from 'next/router'
+
 import { useQueryGames } from 'graphql/queries/games'
+import { parseQueryStringToFilter, parseQueryStringToWhere } from 'utils/filter'
+
 import Base from 'templates/Base'
+import { KeyboardArrowDown as ArrowDown } from '@styled-icons/material-outlined/KeyboardArrowDown'
+
 import ExploreSidebar, { ItemProps } from 'components/ExploreSidebar'
 import GameCard from 'components/GameCard'
 import { Grid } from 'components/Grid'
-import { useRouter } from 'next/router'
-import { KeyboardArrowDown as ArrowDown } from '@styled-icons/material-outlined/KeyboardArrowDown'
 
 import * as S from './styles'
-import { parseQueryStringToFilter, parseQueryStringToWhere } from 'utils/filter'
-import { ParsedUrlQueryInput } from 'querystring'
 
 export type GamesTemplateProps = {
   filterItems: ItemProps[]
@@ -50,7 +53,7 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
         />
 
         {loading ? (
-          <p>loading...</p>
+          <p>Loading...</p>
         ) : (
           <section>
             <Grid>
