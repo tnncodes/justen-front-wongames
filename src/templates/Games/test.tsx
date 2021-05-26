@@ -28,38 +28,12 @@ jest.mock('templates/Base', () => ({
 }))
 
 describe('<Games />', () => {
-  it('should render loading when starting the template', () => {
-    renderWithTheme(
-      <MockedProvider mocks={[]} addTypename={false}>
-        <Games filterItems={filterItemsMock} />
-      </MockedProvider>
-    )
-
-    expect(screen.getByText(/loading.../i)).toBeInTheDocument()
-  })
-
-  it('should render empty when no games found', async () => {
-    renderWithTheme(
-      <MockedProvider mocks={[]} addTypename={false}>
-        <Games filterItems={filterItemsMock} />
-      </MockedProvider>
-    )
-
-    expect(
-      await screen.findByText(/We didn't find any games with this filter/i)
-    ).toBeInTheDocument()
-  })
-
   // it('should render sections', async () => {
   //   renderWithTheme(
   //     <MockedProvider mocks={[gamesMock]} addTypename={false}>
   //       <Games filterItems={filterItemsMock} />
   //     </MockedProvider>
   //   )
-
-  //   // it starts without data
-  //   // shows loading
-  //   expect(screen.getByText(/loading.../i)).toBeInTheDocument()
 
   //   // we wait until we have data to get the elements
   //   // get => tem certeza do elemento
@@ -73,10 +47,22 @@ describe('<Games />', () => {
   //   ).toBeInTheDocument()
   // })
 
+  it('should render empty when no games found', async () => {
+    renderWithTheme(
+      <MockedProvider mocks={[]} addTypename={false}>
+        <Games filterItems={filterItemsMock} />
+      </MockedProvider>
+    )
+
+    expect(
+      await screen.findByText(/We didn't find any games with this filter/i)
+    ).toBeInTheDocument()
+  })
+
   // it('should render more games when show more is clicked', async () => {
   //   renderWithTheme(
   //     <MockedProvider mocks={[gamesMock, fetchMoreMock]} cache={apolloCache}>
-  //       <Games filterItems={filterItewmsMock} />
+  //       <Games filterItems={filterItemsMock} />
   //     </MockedProvider>
   //   )
 
