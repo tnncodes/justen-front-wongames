@@ -13,10 +13,10 @@ function createApolloClient() {
 }
 
 export function initializeApollo(initialState = null) {
-  // serve para verificar se ja existe uma instancia, para nao criar outra
+  // serve para verificar se já existe uma instância, para não criar outra
   const apolloClientGlobal = apolloClient ?? createApolloClient()
 
-  // se a pagina usar o apolloClient no lado Client
+  // se a página usar o apolloClient no lado client
   // hidratamos o estado inicial aqui
   if (initialState) {
     apolloClientGlobal.cache.restore(initialState)
@@ -24,12 +24,13 @@ export function initializeApollo(initialState = null) {
 
   // sempre inicializando no SSR com cache limpo
   if (typeof window === 'undefined') return apolloClientGlobal
+  // cria o apolloClient se estiver no client side
   apolloClient = apolloClient ?? apolloClientGlobal
 
   return apolloClient
 }
 
-export function useApollo(initialState = {}) {
+export function useApollo(initialState = null) {
   const store = useMemo(() => initializeApollo(initialState), [initialState])
   return store
 }
