@@ -1,5 +1,5 @@
+import { render, screen } from 'utils/test-utils'
 import 'match-media-mock'
-import { render, screen } from '@testing-library/react'
 
 import Slider from '.'
 

@@ -1,6 +1,5 @@
-import { screen } from '@testing-library/react'
+import { render, screen } from 'utils/test-utils'
 import userEvent from '@testing-library/user-event'
-import { renderWithTheme } from 'utils/tests/helpers'
 import { css } from 'styled-components'
 
 import ExploreSidebar from '.'
@@ -11,7 +10,7 @@ describe('<ExploreSidebar />', () => {
   // verificar se existe os titulos
   // ------------------------------
   it('should render the headings', () => {
-    renderWithTheme(<ExploreSidebar items={items} onFilter={jest.fn} />)
+    render(<ExploreSidebar items={items} onFilter={jest.fn} />)
 
     // price
     expect(screen.getByRole('heading', { name: /price/i })).toBeInTheDocument()
@@ -33,7 +32,7 @@ describe('<ExploreSidebar />', () => {
   // verificar se existe os inputs
   // -----------------------------
   it('should render inputs', () => {
-    renderWithTheme(<ExploreSidebar items={items} onFilter={jest.fn} />)
+    render(<ExploreSidebar items={items} onFilter={jest.fn} />)
 
     // checkbox
     expect(
@@ -49,7 +48,7 @@ describe('<ExploreSidebar />', () => {
   // verificar se existe o botao
   // ---------------------------
   it('should render the filter button', () => {
-    renderWithTheme(<ExploreSidebar items={items} onFilter={jest.fn} />)
+    render(<ExploreSidebar items={items} onFilter={jest.fn} />)
 
     expect(screen.getByRole('button', { name: /filter/i })).toBeInTheDocument()
   })
@@ -57,7 +56,7 @@ describe('<ExploreSidebar />', () => {
   // verificar valores iniciais marcados
   // ------------------------------------
   it('should check initial values that are passed', () => {
-    renderWithTheme(
+    render(
       <ExploreSidebar
         items={items}
         initialValues={{ platforms: ['windows'], sort_by: 'low-to-high' }}
@@ -78,7 +77,7 @@ describe('<ExploreSidebar />', () => {
     // mock da funcao onFilter (verifica se foi chamado e com quais valoes)
     const onFilter = jest.fn()
 
-    renderWithTheme(
+    render(
       <ExploreSidebar
         items={items}
         initialValues={{ platforms: ['windows'], sort_by: 'low-to-high' }}
@@ -103,7 +102,7 @@ describe('<ExploreSidebar />', () => {
     const onFilter = jest.fn()
 
     // renderizacao do componente
-    renderWithTheme(<ExploreSidebar items={items} onFilter={onFilter} />)
+    render(<ExploreSidebar items={items} onFilter={onFilter} />)
 
     // clicando e marcando o item windows
     userEvent.click(screen.getByLabelText(/windows/i))
@@ -131,7 +130,7 @@ describe('<ExploreSidebar />', () => {
     const onFilter = jest.fn()
 
     // renderizacao do componente
-    renderWithTheme(<ExploreSidebar items={items} onFilter={onFilter} />)
+    render(<ExploreSidebar items={items} onFilter={onFilter} />)
 
     // clicando e marcando o item low to high
     userEvent.click(screen.getByLabelText(/low to high/i))
@@ -147,7 +146,7 @@ describe('<ExploreSidebar />', () => {
   // ------------------------------------
   it('should open/close sidebar when filtering on mobile ', () => {
     // renderizacao do componente
-    const { container } = renderWithTheme(
+    const { container } = render(
       <ExploreSidebar items={items} onFilter={jest.fn} />
     )
 

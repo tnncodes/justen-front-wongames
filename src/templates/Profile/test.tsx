@@ -1,6 +1,5 @@
+import { render, screen } from 'utils/test-utils'
 import 'match-media-mock'
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
 
 import Profile from '.'
 
@@ -31,7 +30,7 @@ jest.mock('components/ProfileMenu', () => ({
 
 describe('<Profile />', () => {
   it('should render sections', () => {
-    renderWithTheme(<Profile>Lorem Ipsum</Profile>)
+    render(<Profile>Lorem Ipsum</Profile>)
 
     // verificar se o children existe
     expect(screen.getByText('Lorem Ipsum')).toBeInTheDocument()

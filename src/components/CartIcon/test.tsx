@@ -1,5 +1,4 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { render, screen } from 'utils/test-utils'
 
 import CartIcon from '.'
 
@@ -7,7 +6,7 @@ describe('<CartIcon />', () => {
   // Teste sem badge
   // ---------------
   it('should render without badge', () => {
-    renderWithTheme(<CartIcon />)
+    render(<CartIcon />)
 
     // verificar se existe o icone
     expect(screen.getByLabelText(/shopping cart/i)).toBeInTheDocument()
@@ -20,7 +19,7 @@ describe('<CartIcon />', () => {
   // Teste sem badge
   // ---------------
   it('should render with badge', () => {
-    renderWithTheme(<CartIcon quantity={3} />)
+    render(<CartIcon quantity={3} />)
 
     // verificar se a badge esteja no documento
     expect(screen.getByLabelText(/cart items/i)).toBeInTheDocument()
@@ -32,7 +31,7 @@ describe('<CartIcon />', () => {
   // Testar para aceitar somente numeros positivos
   // ---------------------------------------------
   it('should render with badge only if has positive numbers', () => {
-    renderWithTheme(<CartIcon quantity={-1} />)
+    render(<CartIcon quantity={-1} />)
 
     // não espero encontrar o badge
     // em consultas que não espera encontrar determinado elemento, utilizar query

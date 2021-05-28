@@ -1,12 +1,11 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { render, screen } from 'utils/test-utils'
 import theme from 'styles/theme'
 
 import ProfileMenu from '.'
 
 describe('ProfileMenu', () => {
   it('should render the menu', () => {
-    const { container } = renderWithTheme(<ProfileMenu />)
+    const { container } = render(<ProfileMenu />)
 
     // verificar os 4 links existentes
     // -------------------------------
@@ -33,7 +32,7 @@ describe('ProfileMenu', () => {
   })
 
   it('should render the menu with an active link defined', () => {
-    renderWithTheme(<ProfileMenu activeLink="/profile/cards" />)
+    render(<ProfileMenu activeLink="/profile/cards" />)
 
     // testar o link ativo
     // -------------------
