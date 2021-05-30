@@ -2,7 +2,7 @@ import { ApolloProvider } from '@apollo/client'
 import { ThemeProvider } from 'styled-components'
 import { CartProvider } from 'hooks/use-cart'
 
-import type { AppProps } from 'next/app'
+import { AppProps } from 'next/app'
 import Head from 'next/head'
 
 import GlobalStyles from 'styles/global'
@@ -26,9 +26,9 @@ function App({ Component, pageProps }: AppProps) {
               content="The best Games Stores in the world!"
             />
           </Head>
+          <GlobalStyles />
+          <Component {...pageProps} />
         </CartProvider>
-        <GlobalStyles />
-        <Component {...pageProps} />
       </ThemeProvider>
     </ApolloProvider>
   )
