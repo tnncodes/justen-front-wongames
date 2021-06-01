@@ -53,6 +53,12 @@ describe('<FormSignIn />', () => {
         width: 100%;
       }
 
+      .c5:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 2.4rem #EAEAEA inset;
+        -webkit-filter: none;
+        filter: none;
+      }
+
       .c3 {
         display: -webkit-box;
         display: -webkit-flex;
