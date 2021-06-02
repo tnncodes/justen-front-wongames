@@ -2,6 +2,17 @@ import { render, screen } from 'utils/test-utils'
 
 import FormSignIn from '.'
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const useRouter = jest.spyOn(require('next/router'), 'useRouter')
+const push = jest.fn()
+
+useRouter.mockImplementation(() => ({
+  push,
+  query: '',
+  asPath: '',
+  route: '/'
+}))
+
 describe('<FormSignIn />', () => {
   it('should render the form', () => {
     const { container } = render(<FormSignIn />)
@@ -238,9 +249,12 @@ describe('<FormSignIn />', () => {
               </a>
               <button
                 class="c7 c8"
+                type="submit"
               >
                 <span>
-                  Sign in now
+                  <span>
+                    Sign in now
+                  </span>
                 </span>
               </button>
               <div
