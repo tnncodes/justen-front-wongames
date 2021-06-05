@@ -43,3 +43,23 @@ export function signInValidate(values: SignInValues) {
 
   return getFieldErrors(schema.validate(values, { abortEarly: false }))
 }
+
+// O Pick serve para pegar uma propriedade ou mais
+type ForgotValidateParams = Pick<UsersPermissionsRegisterInput, 'email'>
+export function forgotValidate(values: ForgotValidateParams) {
+  const { email } = fieldsValidations
+  const schema = Joi.object({ email })
+
+  return getFieldErrors(schema.validate(values, { abortEarly: false }))
+}
+
+type ResetValidateParams = {
+  password: string
+  confirm_password: string
+}
+export function resetValidate(values: ResetValidateParams) {
+  const { password, confirm_password } = fieldsValidations
+  const schema = Joi.object({ password, confirm_password })
+
+  return getFieldErrors(schema.validate(values, { abortEarly: false }))
+}

@@ -243,7 +243,7 @@ describe('<FormSignIn />', () => {
               </div>
               <a
                 class="c6"
-                href="#"
+                href="/forgot-password"
               >
                 Forget your password?
               </a>
