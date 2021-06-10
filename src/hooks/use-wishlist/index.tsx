@@ -62,7 +62,7 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
     }
   )
 
-  const { data, loading } = useQueryWishlist({
+  const { data, loading: loadingQuery } = useQueryWishlist({
     skip: !session?.user?.email,
     context: { session },
     variables: {
@@ -102,7 +102,16 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
     })
   }
 
-  const removeFromWishlist = (id: string) => {}
+  const removeFromWishlist = (id: string) => {
+    updateList({
+      variables: {
+        input: {
+          where: { id: wishlistId },
+          data: { games: wishlistIds.filter((gameId: string) => gameId !== id) }
+        }
+      }
+    })
+  }
 
   return (
     <WishlistContext.Provider
@@ -111,7 +120,7 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
         isInWishlist,
         addToWishlist,
         removeFromWishlist,
-        loading
+        loading: loadingQuery || loadingCreate || loadingUpdate
       }}
     >
       {children}
