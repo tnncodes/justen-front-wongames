@@ -3,7 +3,7 @@ import Profile from 'templates/Profile'
 
 import mockCards from 'components/PaymentOptions/mock'
 import { GetServerSidePropsContext } from 'next'
-import protectedRoutes from 'utils/protected-toutes'
+import protectedRoutes from 'utils/protected-routes'
 
 export default function Me({ cards }: CardsListProps) {
   return (
