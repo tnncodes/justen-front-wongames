@@ -1,5 +1,6 @@
-import { render, screen } from 'utils/test-utils'
+import 'session.mock'
 import 'match-media-mock'
+import { render, screen } from 'utils/test-utils'
 import Wishlist from '.'
 
 import gamesMock from 'components/GameCardSlider/mock'

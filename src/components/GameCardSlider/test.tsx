@@ -1,5 +1,6 @@
-import { render, screen } from 'utils/test-utils'
+import 'session.mock'
 import 'match-media-mock'
+import { render, screen } from 'utils/test-utils'
 import items from './mock'
 
 import GameCardSlider from '.'

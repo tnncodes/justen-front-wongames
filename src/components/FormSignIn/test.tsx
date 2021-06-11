@@ -113,6 +113,10 @@ describe('<FormSignIn />', () => {
         width: 100%;
       }
 
+      .c8:focus {
+        outline: 1px dashed;
+      }
+
       .c8:hover {
         background: linear-gradient(180deg,#e35565 0%,#d958a6 50%);
       }
