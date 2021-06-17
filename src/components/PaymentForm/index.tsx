@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { session, Session, useSession } from 'next-auth/client'
-import { createPaymentIntent } from 'utils/stripe/methods'
+import { createPayment, createPaymentIntent } from 'utils/stripe/methods'
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
-import { StripeCardElementChangeEvent } from '@stripe/stripe-js'
+import { PaymentIntent, StripeCardElementChangeEvent } from '@stripe/stripe-js'
 import { ErrorOutline, ShoppingCart } from '@styled-icons/material-outlined'
 import { useCart } from 'hooks/use-cart'
 import Button from 'components/Button'
@@ -64,12 +64,25 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
     setError(event.error ? event.error.message : '')
   }
 
+  const saveOrder = async (paymentIntent?: PaymentIntent) => {
+    const data = await createPayment({
+      items,
+      paymentIntent,
+      token: session.jwt
+    })
+
+    return data
+  }
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
     setLoading(true)
 
     if (freeGames) {
       // salva no banco
+      // bater na API /orders
+      saveOrder()
+
       // redireciona para success
       push('/success')
       return
@@ -89,6 +102,9 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
       setLoading(false)
 
       // salvar a compra no banco do Strapi
+      // bater na API /orders
+      saveOrder(payload.paymentIntent)
+
       // redirectionar para a página de Sucesso
       push('/success')
     }
