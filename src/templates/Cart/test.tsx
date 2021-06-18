@@ -1,5 +1,5 @@
-import { render, screen } from 'utils/test-utils'
 import 'match-media-mock'
+import { render, screen } from 'utils/test-utils'
 
 import gamesMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
@@ -7,6 +7,13 @@ import highlightMock from 'components/Highlight/mock'
 import Cart from '.'
 
 const props = {
+  session: {
+    jwt: 'token',
+    user: {
+      email: 'won@games.com'
+    },
+    expires: '13234'
+  },
   recommendedTitle: 'You may like these games',
   recommendedHighlight: highlightMock,
   recommendedGames: gamesMock
@@ -33,7 +40,7 @@ jest.mock('components/CartList', () => ({
   }
 }))
 
-jest.mock('components/PaymentOptions', () => ({
+jest.mock('components/PaymentForm', () => ({
   __esModule: true,
   default: function Mock() {
     return <div data-testid="Mock PaymentForm" />
