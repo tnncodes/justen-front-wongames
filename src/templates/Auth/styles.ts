@@ -8,7 +8,6 @@ export const Wrapper = styled.main`
   display: grid;
   grid-template-columns: 1fr;
   height: 100vh;
-
   ${media.greaterThan('medium')`
     grid-template-columns: 1fr 1fr;
   `}
@@ -18,15 +17,10 @@ export const BannerBlock = styled.div`
   ${({ theme }) => css`
     position: relative;
     padding: ${theme.spacings.xxlarge} ${theme.spacings.xxlarge}
-      ${theme.spacings.xxlarge};
-    background-image: url(/img/auth-bg.jpeg);
-    background-size: cover;
-    background-position: center center;
-
+      ${theme.spacings.large};
     ${media.lessThan('medium')`
       display: none;
     `}
-
     &:after {
       content: '';
       position: absolute;
@@ -35,21 +29,20 @@ export const BannerBlock = styled.div`
       left: 0;
       right: 0;
       background: ${theme.colors.black};
-      opacity: 0.75;
+      opacity: 0.85;
     }
   `}
 `
 
 export const BannerContent = styled.div`
   ${({ theme }) => css`
-    position: relative;
-    z-index: ${theme.layers.base};
+    color: ${theme.colors.white};
     display: grid;
     grid-template-columns: 1fr;
     justify-content: space-between;
     height: 100%;
-    color: ${theme.colors.white};
-
+    position: relative;
+    z-index: ${theme.layers.base};
     a {
       width: fit-content;
       height: fit-content;
@@ -62,7 +55,6 @@ export const Subtitle = styled.h3`
     font-size: ${theme.font.sizes.xxlarge};
     font-weight: ${theme.font.light};
     margin-top: ${theme.spacings.xxsmall};
-
     strong {
       color: ${theme.colors.primary};
     }
@@ -79,25 +71,22 @@ export const Footer = styled.p`
 
 export const Content = styled.div`
   ${({ theme }) => css`
+    background: ${theme.colors.white};
     display: grid;
     align-items: center;
     justify-content: center;
-    background: ${theme.colors.white};
   `}
 `
 
 export const ContentWrapper = styled.div`
   ${({ theme }) => css`
     width: 30rem;
-
     ${media.greaterThan('medium')`
       width: 36rem;
     `}
-
     ${LogoStyles.Wrapper} {
       margin: 0 auto ${theme.spacings.xxlarge};
     }
-
     ${HeadingStyles.Wrapper} {
       margin-bottom: ${theme.spacings.medium};
     }

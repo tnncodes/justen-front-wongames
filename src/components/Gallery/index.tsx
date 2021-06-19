@@ -1,8 +1,11 @@
+import Image from 'next/image'
+
 import { useState, useEffect, useRef } from 'react'
 import { ArrowBackIos as ArrowLeft } from '@styled-icons/material-outlined/ArrowBackIos'
 import { ArrowForwardIos as ArrowRight } from '@styled-icons/material-outlined/ArrowForwardIos'
 import { Close } from '@styled-icons/material-outlined/Close'
 import SlickSlider from 'react-slick'
+
 import Slider, { SliderSettings } from 'components/Slider'
 
 import * as S from './styles'
@@ -60,7 +63,7 @@ export type GalleryProps = {
   items: GalleryImageProps[]
 }
 
-const GallerySlider = ({ items }: GalleryProps) => {
+const Gallery = ({ items }: GalleryProps) => {
   const slider = useRef<SlickSlider>(null)
   const [isOpen, setIsOpen] = useState(false)
 
@@ -77,7 +80,9 @@ const GallerySlider = ({ items }: GalleryProps) => {
     <S.Wrapper>
       <Slider ref={slider} settings={settings}>
         {items.map((item, index) => (
-          <img
+          <Image
+            width={295}
+            height={165}
             role="button"
             key={`thumb-${index}`}
             src={item.src}
@@ -102,7 +107,13 @@ const GallerySlider = ({ items }: GalleryProps) => {
         <S.Content>
           <Slider ref={slider} settings={modalSettings}>
             {items.map((item, index) => (
-              <img key={`gallery-${index}`} src={item.src} alt={item.label} />
+              <Image
+                width={1200}
+                height={675}
+                key={`gallery-${index}`}
+                src={item.src}
+                alt={item.label}
+              />
             ))}
           </Slider>
         </S.Content>
@@ -111,4 +122,4 @@ const GallerySlider = ({ items }: GalleryProps) => {
   )
 }
 
-export default GallerySlider
+export default Gallery
