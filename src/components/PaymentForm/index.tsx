@@ -1,16 +1,18 @@
+import Link from 'next/link'
 import React, { useState, useEffect } from 'react'
-import { session, Session, useSession } from 'next-auth/client'
-import { createPayment, createPaymentIntent } from 'utils/stripe/methods'
+import { useRouter } from 'next/router'
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import { PaymentIntent, StripeCardElementChangeEvent } from '@stripe/stripe-js'
 import { ErrorOutline, ShoppingCart } from '@styled-icons/material-outlined'
+
 import { useCart } from 'hooks/use-cart'
 import Button from 'components/Button'
 import Heading from 'components/Heading'
-import { FormLoading } from 'components/Form'
-import { useRouter } from 'next/router'
 
 import * as S from './styles'
+import { createPayment, createPaymentIntent } from 'utils/stripe/methods'
+import { Session } from 'next-auth/client'
+import { FormLoading } from 'components/Form'
 
 type PaymentFormProps = {
   session: Session
@@ -21,11 +23,12 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
   const { push } = useRouter()
   const stripe = useStripe()
   const elements = useElements()
+
   const [error, setError] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
   const [disabled, setDisabled] = useState(true)
   const [clientSecret, setClientSecret] = useState('')
   const [freeGames, setFreeGames] = useState(false)
-  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     async function setPaymentMode() {
@@ -78,6 +81,7 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
     event.preventDefault()
     setLoading(true)
 
+    // se for freeGames
     if (freeGames) {
       // salva no banco
       // bater na API /orders
@@ -142,9 +146,11 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
           )}
         </S.Body>
         <S.Footer>
-          <Button as="a" fullWidth minimal>
-            Continue shopping
-          </Button>
+          <Link href="/" passHref>
+            <Button as="a" fullWidth minimal>
+              Continue shopping
+            </Button>
+          </Link>
           <Button
             fullWidth
             icon={loading ? <FormLoading /> : <ShoppingCart />}
