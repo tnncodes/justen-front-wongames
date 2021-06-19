@@ -1,4 +1,6 @@
 import NextNprogress from 'nextjs-progressbar'
+import { DefaultSeo } from 'next-seo'
+import SEO from '../../next-seo.config'
 import { Provider as AuthProvider } from 'next-auth/client'
 import { ApolloProvider } from '@apollo/client'
 import { WishlistProvider } from 'hooks/use-wishlist'
@@ -31,6 +33,7 @@ function App({ Component, pageProps }: AppProps) {
                   content="The best Games Stores in the world!"
                 />
               </Head>
+              <DefaultSeo {...SEO} />
               <GlobalStyles />
               <NextNprogress
                 color="#F231A5"
