@@ -22,13 +22,13 @@ declare namespace Cypress {
      * Custom command to get element by data-cy
      * @example cy.getByDataCy('selector')
      */
-     getByDataCy(selector: string): Chainable<Element>
+    getByDataCy(selector: string): Chainable<Element>
 
     /**
      * Custom command to get fields by label
      * @example cy.getFields([{ label: 'foo', name: 'foo' }])
      */
-     getFields(fields: FieldsAttributes[]): Chainable<Element>
+    getFields(fields: FieldsAttributes[]): Chainable<Element>
 
     /**
      * Custom command to check banner in page
@@ -41,5 +41,17 @@ declare namespace Cypress {
      * @example cy.shouldRenderShowcase()
      */
     shouldRenderShowcase(attrs: ShowcaseAttributes): Chainable<Element>
+
+    /**
+     * Custom command to check if value is less than
+     * @example cy.shouldBeLessThan(100)
+     */
+     shouldBeLessThan(value: number): Chainable<Element>
+
+    /**
+      * Custom command to check if value is greater than
+      * @example cy.shouldBeGreaterThan(100)
+      */
+    shouldBeGreaterThan(value: number): Chainable<Element>
   }
 }
