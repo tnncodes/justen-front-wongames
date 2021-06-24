@@ -29,14 +29,13 @@ function getFieldErrors(objError: Joi.ValidationResult) {
   return errors
 }
 
-type SignInValues = Omit<UsersPermissionsRegisterInput, 'username'>
-
-export function signUpValidate(values: SignInValues) {
+export function signUpValidate(values: UsersPermissionsRegisterInput) {
   const schema = Joi.object(fieldsValidations)
 
   return getFieldErrors(schema.validate(values, { abortEarly: false }))
 }
 
+type SignInValues = Omit<UsersPermissionsRegisterInput, 'username'>
 export function signInValidate(values: SignInValues) {
   const { email, password } = fieldsValidations
   const schema = Joi.object({ email, password })
@@ -44,7 +43,6 @@ export function signInValidate(values: SignInValues) {
   return getFieldErrors(schema.validate(values, { abortEarly: false }))
 }
 
-// O Pick serve para pegar uma propriedade ou mais
 type ForgotValidateParams = Pick<UsersPermissionsRegisterInput, 'email'>
 export function forgotValidate(values: ForgotValidateParams) {
   const { email } = fieldsValidations
@@ -57,6 +55,7 @@ type ResetValidateParams = {
   password: string
   confirm_password: string
 }
+
 export function resetValidate(values: ResetValidateParams) {
   const { password, confirm_password } = fieldsValidations
   const schema = Joi.object({ password, confirm_password })
