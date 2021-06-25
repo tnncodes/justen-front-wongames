@@ -1,9 +1,10 @@
+
 // load type definitions from Cypress module
 /// <reference types="cypress" />
 
 type ShowcaseAttributes = {
   name: string
-  highlight?: boolean
+  hightlight?: boolean
 }
 
 type FieldsAttributes = {
@@ -16,6 +17,7 @@ type User = {
   email: string
   password: string
 }
+
 declare namespace Cypress {
   interface Chainable {
     /**
@@ -55,7 +57,7 @@ declare namespace Cypress {
     shouldRenderBanner(): Chainable<Element>
 
     /**
-     * Custom command to check Showcase in page
+     * Custom command to check banner in page
      * @example cy.shouldRenderShowcase()
      */
     shouldRenderShowcase(attrs: ShowcaseAttributes): Chainable<Element>
@@ -64,12 +66,24 @@ declare namespace Cypress {
      * Custom command to check if value is less than
      * @example cy.shouldBeLessThan(100)
      */
-     shouldBeLessThan(value: number): Chainable<Element>
+    shouldBeLessThan(value: number): Chainable<Element>
 
     /**
-      * Custom command to check if value is greater than
-      * @example cy.shouldBeGreaterThan(100)
-      */
+     * Custom command to check if value is greater than
+     * @example cy.shouldBeGreaterThan(100)
+     */
     shouldBeGreaterThan(value: number): Chainable<Element>
+
+    /**
+     * Custom command to add game to cart by index
+     * @example cy.addToCartByIndex(1)
+     */
+    addToCartByIndex(value: number): Chainable<Element>
+
+    /**
+     * Custom command to remove game from cart by index
+     * @example cy.removeFromCartByIndex(2)
+     */
+    removeFromCartByIndex(value: number): Chainable<Element>
   }
 }

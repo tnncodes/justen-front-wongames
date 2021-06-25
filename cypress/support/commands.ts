@@ -48,6 +48,7 @@ Cypress.Commands.add('signIn', (email = 'e2e@wongames.com', password = '123456')
   cy.findByRole('button', { name: /sign in now/i }).click()
 })
 
+
 Cypress.Commands.add('shouldRenderBanner', () => {
   cy.get('.slick-slider').within(() => {
     cy.findByRole('heading', { name: /cyberpunk 2077/i })
@@ -56,24 +57,24 @@ Cypress.Commands.add('shouldRenderBanner', () => {
     cy.get('.slick-dots > :nth-child(2) > button').click()
     cy.wait(500)
 
-    cy.findByRole('heading', { name: 'The Outer Worlds' })
+    cy.findByRole('heading', { name: /horizon zero dawn/i })
     cy.findByRole('link', { name: /buy now/i })
 
     cy.get('.slick-dots > :nth-child(3) > button').click()
     cy.wait(500)
 
-    cy.findByRole('heading', { name: 'STAR WARS™: The Force Unleashed™ II' })
-    cy.findByRole('link', { name: /buy now/i })
+    cy.findByRole('heading', { name: /huge promotion!/i })
+    cy.findByRole('link', { name: /browse games/i })
   })
 })
 
-Cypress.Commands.add('shouldRenderShowcase', ({name, highlight = false}) => {
+Cypress.Commands.add('shouldRenderShowcase', ({ name, hightlight = false }) => {
   cy.getByDataCy(name).within(() => {
-    cy.findAllByRole('heading', {name}).should('exist')
+    cy.findByRole('heading', { name }).should('exist')
 
-    cy.getByDataCy('highlight').should(highlight ? 'exist' : 'not.exist')
+    cy.getByDataCy('highlight').should(hightlight ? 'exist' : 'not.exist')
 
-    if (highlight) {
+    if (hightlight) {
       cy.getByDataCy('highlight').within(() => {
         cy.findByRole('link').should('have.attr', 'href')
       })
@@ -105,4 +106,16 @@ Cypress.Commands.add('shouldBeLessThan', (value) => {
     .then($el => $el.replace('$', ''))
     .then(parseFloat)
     .should('be.lt', value)
+})
+
+Cypress.Commands.add('addToCartByIndex', (index) => {
+  cy.getByDataCy('game-card').eq(index).within(() => {
+    cy.findByRole('button', { name: /add to cart/i }).click()
+  })
+})
+
+Cypress.Commands.add('removeFromCartByIndex', (index) => {
+  cy.getByDataCy('game-card').eq(index).within(() => {
+    cy.findByRole('button', { name: /remove from cart/i }).click()
+  })
 })
